@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+
+cpplint \
+    --verbose=2 \
+    --output=vs7 \
+    --filter=-build/c++11,-whitespace/braces,-whitespace/indent,-whitepsace/parens \
+    --recursive \
+    --exclude=build \
+    --root=include \
+    --linelength=100 \
+    .
