@@ -6,9 +6,12 @@ set(CMAKE_BUILD_TYPE Debug)
 project(cpp-algorithms)
 
 include_directories(include)
+
+# ============ LIBRARIES =============== 
 add_library(singly_linked_list SHARED src/linked_list/node.cpp src/linked_list/singly_linked_list.cpp)
+list(APPEND libraries singly_linked_list)
 
 add_executable(cpp-algorithms src/main.cpp)
-target_link_libraries(cpp-algorithms singly_linked_list)
+target_link_libraries(cpp-algorithms ${libraries})
 
 add_subdirectory(test)

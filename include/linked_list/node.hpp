@@ -16,7 +16,7 @@ class Node
 {
 public:
   Node();
-  ~Node();
+  //~Node();
   int get_data();
   void set_data(int data);
   Node* get_next();
