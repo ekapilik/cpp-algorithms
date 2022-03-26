@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+TEST_EXECUTABLE=./build/test/cpp-algorithms-test
+
+if ! [ -f "$TEST_EXECUTABLE" ]; then
+  ./build_me
+fi
+
+${TEST_EXECUTABLE}
