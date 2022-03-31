@@ -1,5 +1,5 @@
 /**
- * @file SinglyLinkedList.cpp
+ * @file singly_linked_list.cpp
  * @author Eric Kapilik (erickapilik@gmail.com)
  * @brief Implement a singly linked list.
  * @version 0.1

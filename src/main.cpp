@@ -17,7 +17,7 @@ int main(int argc, char * argv[]) {
 
     linked_list::SinglyLinkedList sll;
     std::cout << sll << std::endl;
-    for(int i = 0; i < 10; ++i){
+    for (int i = 0; i < 10; ++i){
         sll.push_back(i);
         std::cout << sll << std::endl;
     }
