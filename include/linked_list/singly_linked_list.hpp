@@ -21,10 +21,21 @@ class SinglyLinkedList
 {
 public:
   SinglyLinkedList();
-//  ~singly_linked_list();
   void push_back(int data);
+  void push_back(Node* node);
+  void push_front(int data);
+  void push_front(Node* node);
+  Node* pop_back();
+  Node* pop_front();
   Node* front() const;
+  bool empty() const;
+  int size() const;
+  void clear();
+  void sort();
 private:
+  void split(SinglyLinkedList& list_a, SinglyLinkedList& list_b);
+  void merge_sort(SinglyLinkedList& list);
+  void sorted_merge();
   Node* head_;
   Node* current_;
 };
@@ -41,5 +52,5 @@ std::ostream& operator<<(std::ostream& os, const SinglyLinkedList& sll)
   return os;
 }
 
-}  // linked_list
+}  // namespace linked_list
 #endif  // LINKED_LIST_SINGLY_LINKED_LIST_HPP_
