@@ -14,18 +14,13 @@
 namespace linked_list
 {
 
-Node::Node() : data_{0}, next_{NULL}
+Node::Node() : data_{0}, next_{nullptr}
 {
 }
 
-/*
-Node::~Node()
+Node::Node(int data) : data_{data}, next_{nullptr}
 {
-  if(next != NULL){
-    delete(next);
-  }
 }
-*/
 
 int Node::get_data()
 {
@@ -47,4 +42,4 @@ void Node::set_next(Node* node)
   next_ = node;
 }
 
-}
+}  // namespace linked_list

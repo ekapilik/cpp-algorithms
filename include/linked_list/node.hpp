@@ -10,13 +10,14 @@
  */
 #ifndef LINKED_LIST_NODE_HPP_
 #define LINKED_LIST_NODE_HPP_
+
 namespace linked_list
 {
 class Node
 {
 public:
   Node();
-  //~Node();
+  Node(int data);
   int get_data();
   void set_data(int data);
   Node* get_next();

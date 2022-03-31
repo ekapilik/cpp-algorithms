@@ -1,3 +1,13 @@
+/**
+ * @file test_node.cpp
+ * @author Eric Kapilik (erickapilik@gmail.com)
+ * @brief Unit test the node class
+ * @version 0.1
+ * @date 2022-03-29
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include "gtest/gtest.h"
 #include "linked_list/node.hpp"
 
@@ -25,6 +35,16 @@ TEST_F(NodeTestFixture, IsEmptyInitially)
   EXPECT_EQ(node_.get_next(), nullptr);
   EXPECT_EQ(node_ptr_->get_data(), 0);
   EXPECT_EQ(node_ptr_->get_next(), nullptr);
+}
+
+TEST_F(NodeTestFixture, DataConstructor)
+{
+  linked_list::Node new_node = linked_list::Node(5);
+  linked_list::Node* new_node_ptr = new linked_list::Node(8);
+  EXPECT_EQ(new_node.get_data(), 5);
+  EXPECT_EQ(new_node.get_next(), nullptr);
+  EXPECT_EQ(new_node_ptr->get_data(), 8);
+  EXPECT_EQ(new_node_ptr->get_next(), nullptr);
 }
 
 TEST_F(NodeTestFixture, SetData)
