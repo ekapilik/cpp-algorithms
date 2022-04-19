@@ -21,6 +21,7 @@ class SinglyLinkedList
 {
 public:
   SinglyLinkedList();
+  SinglyLinkedList(Node* node);
   void push_back(int data);
   void push_back(Node* node);
   void push_front(int data);
@@ -28,14 +29,15 @@ public:
   Node* pop_back();
   Node* pop_front();
   Node* front() const;
+  int at(const int index) const;
   bool empty() const;
   int size() const;
   void clear();
   void sort();
+  void merge(SinglyLinkedList& other);
+protected:
+  Node* get_middle_node();
 private:
-  void split(SinglyLinkedList& list_a, SinglyLinkedList& list_b);
-  void merge_sort(SinglyLinkedList& list);
-  void sorted_merge();
   Node* head_;
   Node* current_;
 };
@@ -51,6 +53,8 @@ std::ostream& operator<<(std::ostream& os, const SinglyLinkedList& sll)
   os << "]";
   return os;
 }
+
+void move_front_node(linked_list::SinglyLinkedList& source, linked_list::SinglyLinkedList& destination);
 
 }  // namespace linked_list
 #endif  // LINKED_LIST_SINGLY_LINKED_LIST_HPP_

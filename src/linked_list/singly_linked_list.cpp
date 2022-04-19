@@ -9,6 +9,8 @@
  * 
  */
 #include <cstddef>
+#include <cassert>
+#include <iostream>
 #include "linked_list/singly_linked_list.hpp"
 
 namespace linked_list
@@ -16,6 +18,12 @@ namespace linked_list
 SinglyLinkedList::SinglyLinkedList()
 {
   head_ = NULL;
+  current_ = NULL;
+}
+
+SinglyLinkedList::SinglyLinkedList(Node* node)
+{
+  head_ = node;
   current_ = NULL;
 }
 
@@ -73,11 +81,12 @@ Node* SinglyLinkedList::pop_back()
 
 Node* SinglyLinkedList::pop_front()
 {
-  current_ = head_;
-  if (current_ == nullptr){
+  if (empty()){
     return nullptr;
   }
+  current_ = head_;
   head_ = current_->get_next();
+  current_->set_next(nullptr);
   return current_;
 }
 
@@ -114,27 +123,87 @@ void SinglyLinkedList::clear()
   head_ = nullptr;
 }
 
-void SinglyLinkedList::sort()
+int SinglyLinkedList::at(const int index) const
 {
-
+  int count = 0;
+  Node* current = head_;
+  while (count < index && current != nullptr){
+    current = current->get_next();
+    ++count;
+  }
+  if (current == nullptr){
+    return 0;
+  }
+  else{
+    return current->get_data();
+  }
 }
 
+void SinglyLinkedList::sort()
+{
+  if(head_ == nullptr){
+    return;
+  }
 
-//void split(SinglyLinkedList& list_a, SinglyLinkedList& list_b)
-//{
-//  list_a.clear();
-//  list_b.clear();
-//  Node* slow = head_;
-//  Node* fast = head_->get_next();
-//
-//  while (fast != nullptr){
-//    fast = fast->get_next();
-//    if (fast != nullptr){
-//      slow = slow->get_next();
-//      fast = fast->get_next();
-//    }
-//  }
-//
-//  list_a
-//}
+  Node* mid = get_middle_node();
+  Node* head2 = mid->get_next();
+  mid->set_next(nullptr);
+}
+
+void SinglyLinkedList::merge(SinglyLinkedList& other)
+{
+  if (head_ == other.front()){
+    // do nothing, can't merge with self.
+    return;
+  }
+  SinglyLinkedList dummy_list;
+
+  Node* current = pop_front();
+  Node* other_current = other.pop_front();
+  while(current != nullptr && other_current != nullptr){
+    if(current->get_data() <= other_current->get_data()){
+      dummy_list.push_back(current);
+      current = pop_front();
+    } else{
+      dummy_list.push_back(other_current);
+      other_current = other.pop_front();
+    }
+  }
+  while(current != nullptr){
+    // other must be empty because the above while loop ended
+    dummy_list.push_back(current);
+    current = pop_front();
+  }
+  while(other_current){
+    // this must be empty because the above while loop ended
+    dummy_list.push_back(other_current);
+    other_current = other.pop_front();
+  }
+  head_ = dummy_list.front();
+}
+
+Node* SinglyLinkedList::get_middle_node()
+{
+  if(head_ == nullptr){
+    return head_;  // early exit, avoid segmentation fault
+  }
+  Node* slow = head_;
+  Node* fast = head_->get_next();
+
+  while (fast != nullptr){
+    fast = fast->get_next();
+    if (fast != nullptr){
+      slow = slow->get_next();
+      fast = fast->get_next();
+    }
+  }
+  return slow;
+}
+
+void move_front_node(linked_list::SinglyLinkedList& source, linked_list::SinglyLinkedList& destination)
+{
+  Node* node_to_move = source.pop_front();
+  assert(node_to_move != nullptr);
+  destination.push_front(node_to_move);
+}
 }  // namespace linked_list
